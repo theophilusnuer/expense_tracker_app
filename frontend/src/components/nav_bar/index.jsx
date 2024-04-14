@@ -105,9 +105,9 @@ export default function NavBar() {
       </Drawer>
       <AppBar 
       style={{
-        width: isSmallScreen ? '100%' : 'calc(97% - 25px)',
+        width: isSmallScreen ? '100%' : 'calc(100% - 25px)',
         marginRight: isSmallScreen ? '0' : '25px',
-        marginTop: isSmallScreen ? '5px' : '25px',
+        marginTop: isSmallScreen ? '5px' : '15px',
         backgroundColor: "transparent",
         border: '1.5px solid #4D928D',
         borderRadius: '10px',
