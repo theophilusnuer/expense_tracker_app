@@ -56,7 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '10ch',
       '&:focus': {
         width: '20ch',
       },
@@ -114,7 +114,7 @@ export default function NavBar() {
       }} 
       position="static"
       elevation={0}>
-        <Toolbar>
+        <Toolbar sx={{ minHeight: '48px', paddingY: '8px' }}>
           {isSmallScreen && (
             <IconButton
             size="large"
@@ -122,7 +122,7 @@ export default function NavBar() {
             color="inherit"
             aria-label="open drawer"
             onClick={toggleDrawer}
-            sx={{ mr: 2, color: '#4d928d' }}
+            sx={{ mr: 2, color: '#4d928d'}}
             >
               <MenuIcon />
             </IconButton>

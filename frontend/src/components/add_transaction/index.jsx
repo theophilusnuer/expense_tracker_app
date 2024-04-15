@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
+import AddIncome from './income';
+import AddExpense from './expense';
 
 
 
@@ -33,7 +35,7 @@ export default function AddTransaction() {
 
     return (
         <Box
-            sx={{ height: 345, width: '100%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)" }}>
+            sx={{ height:"auto", width: '100%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)" }}>
 
             <div>
                 <Tabs
@@ -64,10 +66,10 @@ export default function AddTransaction() {
                     }}/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    Page 1 content goes here.
+                    <AddIncome/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Page 2 content goes here.
+                  <AddExpense/>
                 </TabPanel>
             </div>
 
