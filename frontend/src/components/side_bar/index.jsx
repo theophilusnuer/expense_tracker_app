@@ -2,6 +2,7 @@ import List from '@mui/material/List';
 import { ListItemText, ListItemButton } from '@mui/material';
 import logo from '../../assets/osikani.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { Link } from 'react-router-dom';
 
 export default function SideBar() {
   return (
@@ -9,10 +10,14 @@ export default function SideBar() {
       <List className="w-48 rounded-br-xl rounded-tr-xl shadow-lg" style={{ backgroundColor: "#4D928D", flex: "1" }}>
         <div className='w-32 h-32 flex ml-9 items-center'> <img src={logo} alt="Osikani" /> </div>
         <ListItemButton>
+          <Link to="/user">
           <ListItemText primary="Overview" style={{ color: "#fff" }} />
+          </Link>
         </ListItemButton>
         <ListItemButton>
+          <Link to="/transactions">
           <ListItemText primary="Transactions" style={{ color: "#fff" }} />
+          </Link>
         </ListItemButton>
         <ListItemButton>
           <ListItemText primary="Expense Budgets" style={{ color: "#fff" }} />

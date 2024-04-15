@@ -1,6 +1,7 @@
 import img from '../../assets/expense.png'
 import { Box, Grid, Typography } from "@mui/material";
-import Login from "../login";
+import Register from '../registration';
+
 
 
 const boxStyle = {
@@ -17,7 +18,7 @@ const imageStyle = {
     // marginLeft:'30px'
 };
 
-export default function LandPage() {
+export default function Reg() {
     return (
         <Grid container spacing={0}>
             {/* landing image */}
@@ -36,10 +37,11 @@ export default function LandPage() {
                     />
                 </Box>
             </Grid>
-            {/* login form */}
-            <Grid item xs={12} sm={6}>
-                <Login />
+            {/* register form */}
+            <Grid item xs={12} sm={6}>    
+                <Register/>
             </Grid>
         </Grid>
     );
 }
+

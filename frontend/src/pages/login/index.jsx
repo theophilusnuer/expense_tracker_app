@@ -9,6 +9,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from "@mui/material/Button";
 import { Link } from 'react-router-dom';
+import login from '../../assets/login.png'
+
 
 export default function Login() {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -27,23 +29,25 @@ export default function Login() {
             boxShadow: "3",
             width: "auto",
             mx: "60px",
-            marginTop: "100px",
+            marginTop: "90px",
+            marginBottom:"25px",
             padding: '20px',
         }}>
             <div>
 
-                <div className="flex justify-center font-bold text-2xl">
-                    <p>Login</p>
+                <div className="flex flex-col font-bold text-2xl">
+                    <img className='w-32 m-auto' src={login} alt="" />
+                    <p className='text-center'>Login</p>
                 </div>
-                <div className='p-10'>
+                <div className='p-8'>
                     <FormControl style={{ marginBottom: "50px" }} fullWidth sx={{ m: 1, width: "full" }}>
-                        <InputLabel htmlFor="standard-adornment-amount">Username</InputLabel>
+                        <InputLabel htmlFor="standard">Username</InputLabel>
                         <Input
-                            id="standard-adornment-amount"
+                            id="standard"
                             label="Username"
                         />
                     </FormControl>
-                    <FormControl style={{ marginBottom: "20px" }} fullWidth sx={{ m: 1, width: "full" }} variant="standard">
+                    <FormControl style={{marginBottom:"20px"}} fullWidth sx={{ m: 1, width: 'full' }} variant="standard">
                         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                         <Input
                             id="standard-adornment-password"
@@ -54,11 +58,13 @@ export default function Login() {
                                         aria-label="toggle password visibility"
                                         onClick={handleClickShowPassword}
                                         onMouseDown={handleMouseDownPassword}
+                                        edge="end"
                                     >
                                         {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             }
+                            label="Password"
                         />
                     </FormControl>
                     <div className='flex justify-center'>

@@ -13,7 +13,7 @@ export default function NetWorth() {
         overflow: "hidden", 
       }}
     >
-      <div style={{ backgroundColor: '#4d928d', width: "25%" }} className="rounded-lg h-7 ml-3 mt-2">
+      <div style={{ backgroundColor: '#4d928d', width: "30%" }} className="rounded-lg h-7 ml-3 mt-2">
         <p className="px-2 text-white font-semibold text-center">NetWorth</p>
       </div>
       <div className='ml-3 my-2'>

@@ -16,6 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { ListItemButton } from '@mui/material';
 import logo from '../../assets/osikani.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -85,10 +86,14 @@ export default function NavBar() {
 
           <div className='w-32 h-32 flex ml-9 items-center'> <img src={logo} alt="Osikani" /> </div>
           <ListItemButton>
-            <ListItemText primary="Overview" style={{ color: "#fff" }} />
+            <Link to="/user">
+              <ListItemText primary="Overview" style={{ color: "#fff" }} />
+            </Link>
           </ListItemButton>
           <ListItemButton>
-            <ListItemText primary="Transactions" style={{ color: "#fff" }} />
+            <Link to="/transactions">
+              <ListItemText primary="Transactions" style={{ color: "#fff" }} />
+            </Link>
           </ListItemButton>
           <ListItemButton>
             <ListItemText primary="Expense Budgets" style={{ color: "#fff" }} />
@@ -103,26 +108,26 @@ export default function NavBar() {
 
         </List>
       </Drawer>
-      <AppBar 
-      style={{
-        width: isSmallScreen ? '100%' : 'calc(100% - 25px)',
-        marginRight: isSmallScreen ? '0' : '25px',
-        marginTop: isSmallScreen ? '5px' : '15px',
-        backgroundColor: "transparent",
-        border: '1.5px solid #4D928D',
-        borderRadius: '10px',
-      }} 
-      position="static"
-      elevation={0}>
+      <AppBar
+        style={{
+          width: isSmallScreen ? '100%' : 'calc(100% - 25px)',
+          marginRight: isSmallScreen ? '0' : '25px',
+          marginTop: isSmallScreen ? '5px' : '15px',
+          backgroundColor: "transparent",
+          border: '1.5px solid #4D928D',
+          borderRadius: '10px',
+        }}
+        position="static"
+        elevation={0}>
         <Toolbar sx={{ minHeight: '48px', paddingY: '8px' }}>
           {isSmallScreen && (
             <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{ mr: 2, color: '#4d928d'}}
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{ mr: 2, color: '#4d928d' }}
             >
               <MenuIcon />
             </IconButton>
