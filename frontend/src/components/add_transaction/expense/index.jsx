@@ -28,7 +28,7 @@ export default function AddExpense() {
         <Box
             component="form"
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '100%' }, // Set width to 100% for all text fields
+                '& .MuiTextField-root': { m: 1, width: '100%' }, 
             }}
             noValidate
             autoComplete="on"

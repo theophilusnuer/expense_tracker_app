@@ -33,7 +33,7 @@ export default function Reg() {
                     <img
                         style={imageStyle}
                         src={img}
-                        alt="Welcome Image"
+                        alt="Welcome"
                     />
                 </Box>
             </Grid>

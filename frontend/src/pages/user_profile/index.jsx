@@ -1,3 +1,4 @@
+import AddBudget from "../../components/add_budget";
 import AddTransaction from "../../components/add_transaction";
 import NavBar from "../../components/nav_bar";
 import NetWorth from "../../components/networth";
@@ -27,8 +28,8 @@ export default function UserProfile() {
            <Recent/>
             <Box
               mr={2}
-              sx={{ height:"auto", width: 'auto', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)" }}>
-             Add A budget
+              sx={{ justifyContent:"center", height:"auto", width: 'auto', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)" }}>
+             <AddBudget/>
             </Box>
 
           </Grid>
