@@ -1,28 +1,27 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './App.css';
-import LandPage from './pages/landing_page';
-import UserProfile from './pages/user_profile';
-import Reg from './pages/landing_page/reg';
-import Transactions from './pages/all_transactions';
-import AddBudget from './components/add_budget';
-
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./App.css";
+import Transactions from "./pages/transactions";
+import Budgets from "./pages/budgets";
+import Dashboard from "./pages/dashboard";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Reports from "./pages/reports_page";
 
 
 function App() {
   const router = createBrowserRouter([
-  {path:"/", element: <LandPage/>},
-  {path:"/user", element: <UserProfile/>},
-  {path:"/register", element: <Reg/> },
-  {path:"/transactions", element: <Transactions/> },
-  {path:"/budget", element: <AddBudget/> },
-
+    { path: "/", element: <Dashboard /> },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "/transactions", element: <Transactions /> },
+    { path: "/budgets", element: <Budgets /> },
+    { path: "/reports", element: <Reports /> },
   ]);
 
-
   return (
-   <>
-  <RouterProvider router={router}/>
-   </>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
