@@ -85,22 +85,29 @@ export default function NavBar() {
         <List className="w-48 h-full" style={{ backgroundColor: "#4D928D" }}>
 
           <div className='w-32 h-32 flex ml-9 items-center'> <img src={logo} alt="Osikani" /> </div>
-          <ListItemButton>
-            <Link to="/user">
+          <Link to="/">
+            <ListItemButton>
               <ListItemText primary="Overview" style={{ color: "#fff" }} />
-            </Link>
-          </ListItemButton>
-          <ListItemButton>
-            <Link to="/transactions">
+            </ListItemButton>
+          </Link>
+
+          <Link to="/transactions">
+            <ListItemButton>
               <ListItemText primary="Transactions" style={{ color: "#fff" }} />
-            </Link>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemText primary="Expense Budgets" style={{ color: "#fff" }} />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemText primary="Reports" style={{ color: "#fff" }} />
-          </ListItemButton>
+            </ListItemButton>
+          </Link>
+
+          <Link to="/budgets">
+            <ListItemButton>
+              <ListItemText primary="Expense Budgets" style={{ color: "#fff" }} />
+            </ListItemButton>
+          </Link>
+
+          <Link to="/reports">
+            <ListItemButton>
+              <ListItemText primary="Reports" style={{ color: "#fff" }} />
+            </ListItemButton>
+          </Link>
           <div style={{ marginTop: '220px' }} className='flex ml-3'>
             <PowerSettingsNewIcon style={{ color: "#fff" }} />
             <p className='text-white font-semibold ml-1'>Log Out</p>
@@ -140,7 +147,7 @@ export default function NavBar() {
             sx={{ flexGrow: 1, display: 'block' }}
 
           >
-            Overview
+            Welcome!
           </Typography>
           {!isSmallScreen && (
             <Search>
