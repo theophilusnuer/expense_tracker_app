@@ -18,9 +18,9 @@ app.use(cors());
 
 
 //routes
-app.use('/osikani/users', usersRouter );
-app.use('/osikani/transactions', transactionsRouter);
-app.use('/osikani/budgets', budgetsRouter);
+app.use('/api/users', usersRouter );
+app.use('/api/transactions', transactionsRouter);
+app.use('/api/budgets', budgetsRouter);
 
 
 //mongoose connection to database

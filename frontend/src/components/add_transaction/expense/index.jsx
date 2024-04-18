@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import LoadingButton from '@mui/lab/LoadingButton';
+import { useState } from 'react';
 
 export default function AddExpense() {
     const categories = [
@@ -23,6 +24,14 @@ export default function AddExpense() {
             name: 'Personal & Health (Eg. insurance,gym,grooming, etc.)',
         },
     ];
+    const [loading, setLoading] = useState(false);
+
+    const addExpense = async (event) => {
+        setLoading(true);
+
+        event.preventDefault();
+        const formData = new FormData
+    }
 
     return (
         <Box
