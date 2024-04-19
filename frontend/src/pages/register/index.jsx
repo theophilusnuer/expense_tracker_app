@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import login from '../../assets/login.png'
 import { Grid, OutlinedInput } from '@mui/material';
 import Welcome from '../../components/welcome';
+import { Link } from 'react-router-dom';
 
 
 export default function Register() {
@@ -55,7 +56,7 @@ export default function Register() {
                                 />
                             </FormControl>
                             <FormControl style={{ marginBottom: "20px" }} fullWidth sx={{ m: 1, width: "full" }}>
-                                <InputLabel htmlFor="standard-adornment-amount">Username</InputLabel>
+                                <InputLabel htmlFor="standard-adornment-amount">Fullname</InputLabel>
                                 <OutlinedInput
                                     id="standard-adornment-amount"
                                     label="Username"
@@ -89,6 +90,12 @@ export default function Register() {
                                     Register
                                 </Button>
                             </div>
+                            <div className='flex justify-center'>
+                            Already Registered?
+                            <Link to="/login">
+                                <p style={{ marginLeft: "8px", color: "#4d928d", fontWeight: "bold" }}>Login Here</p>
+                            </Link>
+                        </div>
                         </div>
                     </div>
                 </Box>

@@ -54,7 +54,7 @@ export default function Login() {
                         </div>
                         <div className='p-8'>
                             <FormControl style={{ marginBottom: "50px" }} fullWidth sx={{ m: 1, width: "full" }}>
-                                <InputLabel htmlFor="standard">Username</InputLabel>
+                                <InputLabel htmlFor="standard">E-mail</InputLabel>
                                 <Input
                                     id="standard"
                                     label="Username"
