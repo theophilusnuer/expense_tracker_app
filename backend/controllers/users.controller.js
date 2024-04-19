@@ -12,6 +12,10 @@ export const register = async (req, res, next) => {
       email: req?.body?.email,
       password: bcrypt.hashSync(req?.body?.password, salt),
     };
+    const userExist = await UserModel.findOne({ email: req?.body?.email });
+    if (userExist) {
+      return res.json({ message: "User already exist" });
+    }
     await UserModel.create(user);
     res.status(201).json({
       message: "User registered successfully!",
@@ -56,7 +60,7 @@ export const getUser = async (req, res, next) => {
     res.status(201).json({
       id: singleUser._id,
       email: singleUser.email,
-      username: singleUser.username
+      username: singleUser.username,
     });
   } catch (error) {
     next(error);
