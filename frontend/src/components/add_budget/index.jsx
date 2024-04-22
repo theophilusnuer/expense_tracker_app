@@ -7,10 +7,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Box from "@mui/material/Box";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useRef } from "react";
+
+
 
 export default function AddBudget() {
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const formRef = useRef(null);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,30 +26,63 @@ export default function AddBudget() {
   };
 
   const addBudget = async (event) => {
-    console.log(event)
-    // setLoading(true);
     event.preventDefault();
-    //Get form data
+    // Get form data
     const formData = new FormData(event.target);
-    console.log(formData);
-    //Post to backend
-    const response = await fetch(
-      `${process.env.REACT_APP_OSIKANI_API_URL}/api/budgets`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          title: formData.get("title"),
-          description: formData.get("description"),
-          date: formData.get("date"),
-          amount: formData.get("amount"),
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
+
+    try {
+      // Retrieve token from session storage
+      const token = sessionStorage.getItem('userToken');
+
+      // Check if token exists
+      if (!token) {
+        throw new Error('Token not found in session storage');
       }
-    );
-    console.log(response);
+
+      // Decode the token to get the payload
+      const decodedToken = jwtDecode(token);
+
+      if (!decodedToken || !decodedToken.id) {
+        throw new Error('Invalid token');
+      }
+      // Access the userId from the decoded payload
+      const userId = decodedToken.id;
+
+      // Post to backend with userID included in the body
+      const response = await fetch(
+        `${process.env.REACT_APP_OSIKANI_API_URL}/api/budgets`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            title: formData.get("title"),
+            description: formData.get("description"),
+            date: formData.get("date"),
+            amount: formData.get("amount"),
+            userId: userId,
+          }),
+          headers: {
+            "Content-type": "application/json",
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to add budget');
+      }
+      // Handle successful response
+      alert('Budget added successfully');
+      //reset form field
+      formRef.current.reset();
+      //navigate to home
+      setOpen(false);
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+
+
 
   return (
     <React.Fragment>
@@ -70,6 +108,7 @@ export default function AddBudget() {
             }}
             noValidate
             autoComplete="on"
+            ref={formRef}
           >
             <div>
               <TextField
@@ -109,7 +148,7 @@ export default function AddBudget() {
             </div>
             <div className="flex" style={{ margin: "1rem 0", width: "100%" }}>
               <LoadingButton
-                loading={loading}
+                // loading={loading}
                 type="submit"
                 size="small"
                 style={{

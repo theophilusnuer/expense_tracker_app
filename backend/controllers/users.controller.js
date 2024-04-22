@@ -14,7 +14,7 @@ export const register = async (req, res, next) => {
     };
     const userExist = await UserModel.findOne({ email: req?.body?.email });
     if (userExist) {
-      return res.json({ message: "User already exist" });
+      return res.status(409).json({ message: "User already exist" });
     }
     await UserModel.create(user);
     res.status(201).json({
@@ -67,13 +67,13 @@ export const getUser = async (req, res, next) => {
   }
 };
 
-//logging out a user
-// export const logout = async(req, res, next) => {
-// //deactivate user token
-// try {
-//   await TokenModel.updateMany({userId: req.user._id}, {active:false});
-//   res.status(200).json({message:"Log out successful!"});
-// } catch (error) {
-//   next(error);
-// }
-// };
+// logging out a user
+export const logout = async (req, res, next) => {
+  //deactivate user token
+  try {
+    await TokenModel.updateMany({ userId: req.user._id }, { active: false });
+    res.status(200).json({ message: "Log out successful!" });
+  } catch (error) {
+    next(error);
+  }
+};

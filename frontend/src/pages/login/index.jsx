@@ -12,20 +12,57 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from 'react-router-dom';
 import login from '../../assets/login.png'
-
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from 'yup';
+import { useState } from 'react';
 
 
 
 
 export default function Login() {
 
-    const navigate = useNavigate();
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
+    };
+
+
+    const navigate = useNavigate();
+
+    const loginUser = async (values, { setSubmitting, resetForm }) => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_OSIKANI_API_URL}/api/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+
+            if (response.ok) {
+                // Registration successful
+                console.log('Logged In successfully');
+                //parse response as json
+                const data = await response.json();
+                const token = data.accessToken
+                //save token to session storage
+                sessionStorage.setItem('userToken', token)
+                // Reset form fields
+                resetForm();
+                // Navigate to dashboard page
+                navigate('/');
+            }
+            else {
+                // Registration failed
+                alert('Login failed, try again');
+            }
+        } catch (error) {
+            console.error('Error registering user:', error);
+        }
+        setSubmitting(false);
     };
 
 
@@ -52,57 +89,77 @@ export default function Login() {
                             <img className='w-32 m-auto' src={login} alt="" />
                             <p className='text-center'>Login</p>
                         </div>
-                        <div className='p-8'>
-                            <FormControl style={{ marginBottom: "50px" }} fullWidth sx={{ m: 1, width: "full" }}>
-                                <InputLabel htmlFor="standard">E-mail</InputLabel>
-                                <Input
-                                    id="standard"
-                                    label="Username"
-                                />
-                            </FormControl>
-                            <FormControl style={{ marginBottom: "20px" }} fullWidth sx={{ m: 1, width: 'full' }} variant="standard">
-                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                                <Input
-                                    id="standard-adornment-password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    label="Password"
-                                />
-                            </FormControl>
-                            <div className='flex justify-center'>
-                                <Button
-                                    onClick={() => {
-                                        // Simulate login user
-                                        sessionStorage.setItem('user', true)
-                                        // Navigate to dashboard
-                                        navigate('/');
-                                    }}
-                                    style={{ color: "white", backgroundColor: "#4d928d", marginBottom: "10px" }}
-                                    sx={{ width: "full" }}
-                                    variant="contained">
-                                    Login
-                                </Button>
-                            </div>
-                        </div>
+
+                        <Formik
+                            initialValues={{
+                                email: '',
+                                password: ''
+                            }}
+                            validationSchema={Yup.object().shape({
+                                email: Yup.string().email('Invalid email').required('Email is required'),
+                                password: Yup.string().required('Password is required')
+                            })}
+                            onSubmit={loginUser}
+                        >
+                            {({ isSubmitting }) => (
+                                <Form>
+                                    <div className='p-8'>
+                                        <FormControl style={{ marginBottom: "50px" }} fullWidth sx={{ m: 1, width: "full" }}>
+                                            <InputLabel htmlFor="email">E-mail</InputLabel>
+                                            <Field
+                                                id="email"
+                                                name="email"
+                                                as={Input}
+                                            />
+                                            <ErrorMessage
+                                                name="email"
+                                                component="div"
+                                            />
+                                        </FormControl>
+                                        <FormControl style={{ marginBottom: "20px" }} fullWidth sx={{ m: 1, width: 'full' }} variant="standard">
+                                            <InputLabel htmlFor="password">Password</InputLabel>
+                                            <Field
+                                                id="password"
+                                                type={showPassword ? 'text' : 'password'}
+                                                name="password"
+                                                as={Input}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                            />
+                                            <ErrorMessage name="password" component="div" />
+                                        </FormControl>
+                                        <div className='flex justify-center'>
+                                            <Button
+                                                type='submit'
+                                                disabled={isSubmitting}
+                                                style={{ color: "white", backgroundColor: "#4d928d", marginBottom: "10px" }}
+                                                sx={{ width: "full" }}
+                                                variant="contained">
+                                                {isSubmitting ? 'Logging In' : 'Login'}
+                                            </Button>
+                                        </div>
+                                        <div className='flex justify-center'>
+                                            New User?
+                                            <Link to="/register">
+                                                <p style={{ marginLeft: "8px", color: "#4d928d", fontWeight: "bold" }}>Register Here</p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
 
 
-                        <div className='flex justify-center'>
-                            New User?
-                            <Link to="/register">
-                                <p style={{ marginLeft: "8px", color: "#4d928d", fontWeight: "bold" }}>Register Here</p>
-                            </Link>
-                        </div>
                     </div>
 
                 </Box>

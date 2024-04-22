@@ -8,7 +8,7 @@ import { Box, Grid } from "@mui/material";
 import { Navigate } from "react-router-dom";
 
 export default function Dashboard() {
-  const user = sessionStorage.getItem("user");
+  const user = sessionStorage.getItem("userToken");
   if (!user) {
     return <Navigate to="/login" replace={true} />;
   }
