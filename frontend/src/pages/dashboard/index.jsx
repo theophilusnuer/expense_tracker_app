@@ -4,7 +4,7 @@ import NavBar from "../../components/nav_bar";
 import NetWorth from "../../components/networth";
 import Recent from "../../components/recent_transactions";
 import SideBar from "../../components/side_bar";
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Navigate } from "react-router-dom";
 
 export default function Dashboard() {
@@ -31,19 +31,8 @@ export default function Dashboard() {
           {/* right side */}
           <Grid item xs={12} sm={8}>
             <Recent />
-            <Box
-              mr={2}
-              sx={{
-                justifyContent: "center",
-                height: "auto",
-                width: "auto",
-                border: "1px solid #f3f4f6 ",
-                borderRadius: "10px",
-                boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)",
-              }}
-            >
+            
               <AddBudget />
-            </Box>
           </Grid>
         </Grid>
       </div>
