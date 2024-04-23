@@ -12,7 +12,7 @@ export const addTransaction = async (req, res, next) => {
 
 export const getTransactions = async (req,res, next) => {
     try {
-        const results = await TransactionModel.find({});
+        const results = await TransactionModel.find(req.query);
         res.status(200).json(results);
     } catch (error) {
         next(error)
@@ -21,8 +21,9 @@ export const getTransactions = async (req,res, next) => {
 
 export const deleteTransaction = async (req,res,next) => {
     const {id} = req.params
+    const {userId} = req.query
     try {
-        const results = await TransactionModel.findByIdAndDelete(id);
+        const results = await TransactionModel.findByIdAndDelete({id,userId});
     res.status(200).json(results);
     } catch (error) {
         next(error)
