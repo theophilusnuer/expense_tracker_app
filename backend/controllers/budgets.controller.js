@@ -21,7 +21,7 @@ export const getBudgets = async (req, res, next) => {
 export const deleteBudget = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const results = await BudgetModel.findByIdAndDelete(id);
+    const results = await BudgetModel.findByIdAndDelete({_id: id});
     res.status(200).json(results);
   } catch (error) {
     next(error);

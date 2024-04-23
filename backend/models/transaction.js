@@ -14,9 +14,18 @@ const transactionSchema = new Schema({
     date: {type: Date, required:true},
     category: {
         type:String,
-        enum: ['momo','bank','cash','transport','food & groceries','utilities','personal & health'],
+        enum: ['Momo','Bank','Cash','Transport','Food & Groceries','Utilities','Personal & Health'],
         required:true
     },
+});
+
+// Customize toJSON to format the date
+transactionSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        // Convert the date to a string without the time part
+        ret.date = ret.date.toISOString().split('T')[0];
+        return ret;
+    }
 });
 
 export const TransactionModel = model ('Transaction', transactionSchema, 'transactions');

@@ -13,19 +13,19 @@ import  { useRef } from "react";
 export default function AddExpense() {
     const categories = [
         {
-            id: 'transport',
+            id: 'Transport',
             name: 'Transport (Eg. fuel,repairs, etc)',
         },
         {
-            id: 'food & groceries',
+            id: 'Food & Groceries',
             name: 'Food & Groceries (Eg. foodstuff,toiletries, etc)',
         },
         {
-            id: 'utilities',
+            id: 'Utilities',
             name: 'Utilities (Eg. lightbill,waterbill,rent, etc.)',
         },
         {
-            id: 'personal & health',
+            id: 'Personal & Health',
             name: 'Personal & Health (Eg. insurance,gym,grooming, etc.)',
         },
     ];
@@ -77,7 +77,6 @@ export default function AddExpense() {
                     },
                 }
             );
-            setLoading(false);
             if (!response.ok) {
                 throw new Error('Failed to add expense');
             }
@@ -86,7 +85,7 @@ export default function AddExpense() {
             //reset form field
             formRef.current.reset();
             //navigate to home
-            navigate('/');
+            setLoading(false);
 
         } catch (error) {
             console.error('Error:', error);
