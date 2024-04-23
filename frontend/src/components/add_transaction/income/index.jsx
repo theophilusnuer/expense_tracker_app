@@ -11,15 +11,15 @@ import { useState } from 'react';
 export default function AddIncome() {
     const categories = [
         {
-            id: 'cash',
+            id: 'Cash',
             name: 'Cash',
         },
         {
-            id: 'momo',
+            id: 'Momo',
             name: 'Momo',
         },
         {
-            id: 'bank',
+            id: 'Bank',
             name: 'Bank',
         },
     ];
@@ -73,7 +73,6 @@ export default function AddIncome() {
                     },
                 }
             );
-            setLoading(false);
             if (!response.ok) {
                 throw new Error('Failed to add income');
             }
@@ -81,8 +80,8 @@ export default function AddIncome() {
             alert('Income added successfully');
             //reset form field
             formRef.current.reset();
-            //navigate to home
-            navigate('/');
+            
+            setLoading(false);
 
         } catch (error) {
             console.error('Error:', error);

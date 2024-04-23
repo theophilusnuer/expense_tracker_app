@@ -21,9 +21,8 @@ export const getTransactions = async (req,res, next) => {
 
 export const deleteTransaction = async (req,res,next) => {
     const {id} = req.params
-    const {userId} = req.query
     try {
-        const results = await TransactionModel.findByIdAndDelete({id,userId});
+        const results = await TransactionModel.findByIdAndDelete({_id: id});
     res.status(200).json(results);
     } catch (error) {
         next(error)
