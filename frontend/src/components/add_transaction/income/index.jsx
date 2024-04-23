@@ -80,7 +80,7 @@ export default function AddIncome() {
             alert('Income added successfully');
             //reset form field
             formRef.current.reset();
-            
+            navigate('/');
             setLoading(false);
 
         } catch (error) {

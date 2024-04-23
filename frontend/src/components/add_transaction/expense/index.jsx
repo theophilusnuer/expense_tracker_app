@@ -82,11 +82,12 @@ export default function AddExpense() {
             }
             // Handle successful response
             alert('Expense added successfully');
+            //setLoading to false
+            setLoading(false);
             //reset form field
             formRef.current.reset();
-            //navigate to home
-            setLoading(false);
-
+            navigate('/');
+            
         } catch (error) {
             console.error('Error:', error);
         }
