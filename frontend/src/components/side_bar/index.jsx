@@ -32,10 +32,13 @@ export default function SideBar() {
           <ListItemText primary="Reports" style={{ color: "#fff" }} />
         </ListItemButton>
         </Link>
+        
+        <Link to="/login">
         <div className='flex ml-3 mb-3 mt-56'>
         <PowerSettingsNewIcon style={{ color: "#fff" }} />
         <p className='text-white font-semibold ml-1'>Log Out</p>
       </div>
+        </Link>
       </List>
      
     </div>

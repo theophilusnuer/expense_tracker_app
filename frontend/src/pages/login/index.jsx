@@ -1,4 +1,4 @@
-import { Grid, } from "@mui/material";
+import { Grid, CircularProgress } from "@mui/material";
 import Welcome from '../../components/welcome';
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -16,24 +16,20 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { useState } from 'react';
 
-
-
-
 export default function Login() {
-
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false); 
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
 
     const navigate = useNavigate();
 
     const loginUser = async (values, { setSubmitting, resetForm }) => {
         try {
+            setLoading(true);
             const response = await fetch(`${process.env.REACT_APP_OSIKANI_API_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
@@ -61,10 +57,11 @@ export default function Login() {
             }
         } catch (error) {
             console.error('Error registering user:', error);
+        } finally {
+            setLoading(false);
+            setSubmitting(false);
         }
-        setSubmitting(false);
     };
-
 
     return (
         <Grid container spacing={0}>
@@ -84,7 +81,6 @@ export default function Login() {
                     padding: '20px',
                 }}>
                     <div>
-
                         <div className="flex flex-col font-bold text-2xl">
                             <img className='w-32 m-auto' src={login} alt="" />
                             <p className='text-center'>Login</p>
@@ -145,7 +141,7 @@ export default function Login() {
                                                 style={{ color: "white", backgroundColor: "#4d928d", marginBottom: "10px" }}
                                                 sx={{ width: "full" }}
                                                 variant="contained">
-                                                {isSubmitting ? 'Logging In' : 'Login'}
+                                                {loading ? <CircularProgress size={18} color="inherit" /> : (isSubmitting ? 'Logging In' : 'Login')}
                                             </Button>
                                         </div>
                                         <div className='flex justify-center'>
@@ -158,10 +154,7 @@ export default function Login() {
                                 </Form>
                             )}
                         </Formik>
-
-
                     </div>
-
                 </Box>
             </Grid>
         </Grid>
