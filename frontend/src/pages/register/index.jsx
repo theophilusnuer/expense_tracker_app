@@ -8,7 +8,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from "@mui/material/Button";
 import login from '../../assets/login.png'
-import { Grid, OutlinedInput } from '@mui/material';
+import { Grid, OutlinedInput, CircularProgress } from '@mui/material';
 import Welcome from '../../components/welcome';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -17,6 +17,7 @@ import { useState } from 'react';
 
 export default function Register() {
     const [showPassword, setShowPassword] = React.useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -29,6 +30,7 @@ export default function Register() {
 
     const registerUser = async (values, { setSubmitting, resetForm }) => {
         try {
+            setLoading(true);
             const response = await fetch(`${process.env.REACT_APP_OSIKANI_API_URL}/api/users/register`, {
                 method: 'POST',
                 headers: {
@@ -54,6 +56,7 @@ export default function Register() {
         } catch (error) {
             console.error('Error registering user:', error);
         }
+        setLoading(false);
         setSubmitting(false);
     };
 
@@ -151,7 +154,7 @@ export default function Register() {
                                                 style={{ color: "white", backgroundColor: "#4d928d", marginBottom: "10px" }}
                                                 sx={{ width: "full" }}
                                                 variant="contained">
-                                                {isSubmitting ? 'Submitting' : 'Register'}
+                                                {loading ? <CircularProgress size={18} color="inherit" /> :(isSubmitting ? 'Submitting' : 'Register')}
                                             </Button>
                                         </div>
 
