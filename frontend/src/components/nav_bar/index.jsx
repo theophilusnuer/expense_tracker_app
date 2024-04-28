@@ -17,6 +17,9 @@ import { ListItemButton } from '@mui/material';
 import logo from '../../assets/osikani.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
+import { useState, useEffect } from "react";
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,13 +72,37 @@ export default function NavBar() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [usersNames, setUsersNames] = useState('');
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
 
+
+    // Retrieve token from session storage
+    const token = sessionStorage.getItem("userToken");
+    // Decode the token to get the payload
+    const decodedToken = jwtDecode(token);
+  
+    const getUserNames = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_OSIKANI_API_URL}/api/users/me`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setUsersNames(data);
+    };
+  
+    useEffect(() => {
+      getUserNames();
+  },[]);
+
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end', height: 'full' }}>
       <Drawer
         anchor="left"
         open={drawerOpen}
@@ -139,6 +166,7 @@ export default function NavBar() {
               <MenuIcon />
             </IconButton>
           )}
+          
           <Typography
             variant="h6"
             noWrap
@@ -147,7 +175,7 @@ export default function NavBar() {
             sx={{ flexGrow: 1, display: 'block' }}
 
           >
-            Welcome!
+            Welcome {usersNames.username}!
           </Typography>
           {!isSmallScreen && (
             <Search>

@@ -33,7 +33,7 @@ export default function Transactions() {
 
     useEffect(() => {
         getUserTransactions();
-    });
+    },[]);
 
     //Deleting a transaction
     const deleteTransaction = async (transaction) => {

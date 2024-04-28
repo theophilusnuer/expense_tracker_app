@@ -7,6 +7,9 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function AddIncome() {
     const categories = [
@@ -77,7 +80,7 @@ export default function AddIncome() {
                 throw new Error('Failed to add income');
             }
             // Handle successful response
-            alert('Income added successfully');
+            toast.success('Income added successfully');
             //reset form field
             formRef.current.reset();
             navigate('/');
@@ -85,6 +88,7 @@ export default function AddIncome() {
 
         } catch (error) {
             console.error('Error:', error);
+            toast.error('Failed to add income')
         }
     };
 
@@ -158,6 +162,7 @@ export default function AddIncome() {
                     Add Income
                 </LoadingButton>
             </div>
+            <ToastContainer/>
         </Box>
     );
 }

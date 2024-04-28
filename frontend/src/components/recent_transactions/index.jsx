@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import AddExpense from '../add_transaction/expense';
 
 
 
@@ -31,7 +32,7 @@ export default function Recent() {
 
     useEffect(() => {
         getUserTransactions();
-    });
+    },);
 
     //Deleting a transaction
     const deleteTransaction = async (transaction) => {
@@ -51,8 +52,8 @@ export default function Recent() {
         <Box
               my={3}
               mr={2}
-              sx={{ height: "auto", width: '96%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)",overflow: "hidden", }}>
-              <div style={{ color: '#4d928d' }}><p className="px-2 font-semibold"> Five (5) Recent Transactions</p></div>
+              sx={{ height: "auto", width: '96%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 2px 3px rgba(77, 146, 141, 1)",overflow: "hidden", }}>
+              <div style={{ color: '#4d928d' }}><p className="px-2 font-semibold"> Four Recent Transactions</p></div>
 
               <table className="bg-white shadow-lg w-full rounded-lg">
                         <thead>
@@ -67,7 +68,7 @@ export default function Recent() {
                         </thead>
                         <tbody>
                         {transactions.length === 0 && <div className="text-2xl text-center font-bold ">No transactions </div>}
-                            {transactions.slice(0,5).map((transaction) => (
+                            {transactions.slice(0,4).map((transaction) => (
                                 <tr key={transaction._id} className="border-b border-gray-100">
                                     <td className=" px-4 py-2">{transaction.date}</td>
                                     <td className=" px-4 py-2">{transaction.title}</td>

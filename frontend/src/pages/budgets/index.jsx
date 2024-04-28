@@ -31,7 +31,7 @@ export default function Budgets() {
 
     useEffect(() => {
         getUserBudgets();
-    });
+    },[]);
 
     //Deleting a budget
     const deleteBudget = async (budget) => {
@@ -89,7 +89,7 @@ export default function Budgets() {
                                     <td className=" px-4 py-2">{budget.title}</td>
                                     <td className=" px-4 py-2 ">{budget.description}</td>
                                     <td className=" px-4 py-2 text-center">
-                                        <p className=" rounded-lg bg-green-200">{budget.amount}</p>
+                                        <p className="font-bold">{budget.amount}</p>
                                     </td>
                                     <td className=" px-4 py-2 "> <DeleteIcon onClick={() => deleteBudget(budget)} /> </td>
                                 </tr>
