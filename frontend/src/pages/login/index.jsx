@@ -56,7 +56,7 @@ export default function Login() {
                
                setTimeout(()=>{
                 navigate('/');
-               },2000);
+               },1000);
             }
             else {
                 // Login failed
