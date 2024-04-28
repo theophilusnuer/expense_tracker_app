@@ -35,7 +35,7 @@ export default function AddTransaction() {
 
     return (
         <Box
-            sx={{ height:"auto", width: '100%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 5px 9px rgba(77, 146, 141, 1)" }}>
+            sx={{ height:"auto", width: '100%', border: '1px solid #f3f4f6 ', borderRadius: '10px', boxShadow: "2px 2px 3px rgba(77, 146, 141, 1)" }}>
 
             <div>
                 <Tabs

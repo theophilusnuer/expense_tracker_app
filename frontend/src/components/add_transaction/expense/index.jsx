@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import  { useRef } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -81,7 +83,7 @@ export default function AddExpense() {
                 throw new Error('Failed to add expense');
             }
             // Handle successful response
-            alert('Expense added successfully');
+            toast.success('Expense added successfully');
             //setLoading to false
             setLoading(false);
             //reset form field
@@ -90,6 +92,7 @@ export default function AddExpense() {
             
         } catch (error) {
             console.error('Error:', error);
+            toast.error('Failed to add income')
         }
     };
 
@@ -164,6 +167,7 @@ export default function AddExpense() {
                     Add Expense
                 </LoadingButton>
             </div>
+            <ToastContainer/>
         </Box>
     );
 }

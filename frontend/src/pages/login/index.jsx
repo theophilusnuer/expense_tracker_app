@@ -15,6 +15,10 @@ import login from '../../assets/login.png'
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -39,8 +43,8 @@ export default function Login() {
             });
 
             if (response.ok) {
-                // Registration successful
-                console.log('Logged In successfully');
+                // login successful
+                toast.success('Logged In successfully');
                 //parse response as json
                 const data = await response.json();
                 const token = data.accessToken
@@ -49,11 +53,14 @@ export default function Login() {
                 // Reset form fields
                 resetForm();
                 // Navigate to dashboard page
+               
+               setTimeout(()=>{
                 navigate('/');
+               },2000);
             }
             else {
-                // Registration failed
-                alert('Login failed, try again');
+                // Login failed
+                toast.error('Login failed, try again');
             }
         } catch (error) {
             console.error('Error registering user:', error);
@@ -134,6 +141,7 @@ export default function Login() {
                                             />
                                             <ErrorMessage name="password" component="div" />
                                         </FormControl>
+                                        <ToastContainer/>
                                         <div className='flex justify-center'>
                                             <Button
                                                 type='submit'

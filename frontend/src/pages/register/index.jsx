@@ -14,6 +14,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function Register() {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -41,17 +45,21 @@ export default function Register() {
 
             if (response.ok) {
                 // Registration successful
-                console.log('User registered successfully');
+                toast.success('User registered successfully');
                 // Reset form fields
                 resetForm();
                 // Navigate to login page
-                navigate('/login');
+                setTimeout (()=> {
+                    navigate('/login');
+                },2000)
+               
             } else if (response.status === 409) {
                 setError('User already exists.');
-            }
-             else {
                 // Registration failed
-                console.error('Registration failed');
+                toast.error('User already exist, try a new email');
+            }
+            else {
+
             }
         } catch (error) {
             console.error('Error registering user:', error);
@@ -154,7 +162,7 @@ export default function Register() {
                                                 style={{ color: "white", backgroundColor: "#4d928d", marginBottom: "10px" }}
                                                 sx={{ width: "full" }}
                                                 variant="contained">
-                                                {loading ? <CircularProgress size={18} color="inherit" /> :(isSubmitting ? 'Submitting' : 'Register')}
+                                                {loading ? <CircularProgress size={18} color="inherit" /> : (isSubmitting ? 'Submitting' : 'Register')}
                                             </Button>
                                         </div>
 
@@ -168,7 +176,7 @@ export default function Register() {
                                 </Form>
                             )}
                         </Formik>
-
+                        <ToastContainer />
                     </div>
                 </Box>
             </Grid>
